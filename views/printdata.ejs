@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="/css/app.css">
+    </head>
+
+
+    <body>
+        <h1>
+            UFO SEARCH:
+        </h1>
+
+            <% for(let i = 1; i < results.length; i++){ %>
+            <ul>
+                <h3>Sightings:</h3><br />
+                <li>Date: <%=results[i].Date%></li>
+                <li>City: <%=results[i].City%></li>
+                <li>State: <%=results[i].State%></li>
+                <li>Shape: <%=results[i].Shape%></li>
+                <li>Duration: <%=results[i].Duration%></li>
+                <li>Summary: <%=results[i].Summary%></li>
+                <li>Posted: <%=results[i].Posted%></li>
+                <li>Images: <%=results[i].Images%></li>
+                <li>Country: <%=results[i].Country%></li>
+            </ul>
+            <% } %>
+    </body> 
+</html>

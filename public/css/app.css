@@ -1,0 +1,13 @@
+ul {
+    width: 50%;
+    height: 10%;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: verdana;
+    font-size: 3vh;
+}
+
+li {
+    padding: 1%;
+}
