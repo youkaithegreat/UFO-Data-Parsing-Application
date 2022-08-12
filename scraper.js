@@ -1,7 +1,7 @@
 const express = require( "express" );
 const axios = require( "axios" );
 const cheerio = require( "cheerio" );
-const PORT = 3000;
+
 const app = express();
 
 app.use( express.static( "public" ) );
@@ -92,7 +92,7 @@ const getInfo = ( keyArg, pairObj, searchDB ) => {
 }
 
 
-app.listen( PORT, () => {
+app.listen( PORT || 3000, () => {
     console.log( "running" )
 } )
 
