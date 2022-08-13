@@ -15,9 +15,8 @@ async function ufoScraper() {
         const html_data = response.data;
         const $ = cheerio.load( html_data );
 
-
         const selectedElem = 'body > font:nth-child(3) > p > font > table > tbody > tr'
-        // const selectedElem = '<tr valign="TOP"><td><a href="reports/168/S168521.html">5/31/22 21:59</a></td><td>Boise</td><td>ID</td><td>USA</td><td>Sphere</td><td>I watched for about 20 mi</td><td>I have 3 pictures I took</td><td>6/22/22</td><td>Yes</td></tr>'
+        //Raw HTML that was Extracted from source'<tr valign="TOP"><td><a href="reports/168/S168521.html">5/31/22 21:59</a></td><td>Boise</td><td>ID</td><td>USA</td><td>Sphere</td><td>I watched for about 20 mi</td><td>I have 3 pictures I took</td><td>6/22/22</td><td>Yes</td></tr>'
 
         const keys = [
             "Date",
@@ -39,7 +38,6 @@ async function ufoScraper() {
                     const value = $( childElem ).text();
                     if ( value ) {
                         ufoSightings[ keys[ keyIndex ] ] = value;
-
                         keyIndex++;
                     }
                 } );
@@ -47,22 +45,18 @@ async function ufoScraper() {
             }
         } );
     } )
-
     return ufoInfo;
-
 }
 
 app.get( "/api/ufo", async ( req, res ) => {
 
-    // try{
-    let ufo = await ufoScraper();
-
-    // }catch(err){
-    //     return res.status(500).json({
-    //         err: err.toString(),
-    //     });
-    // }
-
+    try {
+        let ufo = await ufoScraper();
+    } catch ( err ) {
+        return res.status( 500 ).json( {
+            err: err.toString(),
+        } );
+    }
 
     let reqQuery = req.query;
 
@@ -70,7 +64,6 @@ app.get( "/api/ufo", async ( req, res ) => {
         let searchTerm = Object.keys( reqQuery )[ i ];
         let searchArg = reqQuery[ searchTerm ];
         ufo = getInfo( searchTerm, searchArg, ufo );
-
         console.log( ufo );
     }
 
@@ -90,7 +83,6 @@ const getInfo = ( keyArg, pairObj, searchDB ) => {
     }
     return infoArray;
 }
-
 
 app.listen( process.env.PORT || 3000, () => {
     console.log( "running" )
